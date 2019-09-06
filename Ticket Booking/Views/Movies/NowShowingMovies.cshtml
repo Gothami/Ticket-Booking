@@ -1,0 +1,28 @@
+﻿@model Ticket_Booking.Models.MovieModel
+
+<div>
+    <h4>MovieModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MovieID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MovieID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MovieName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MovieName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

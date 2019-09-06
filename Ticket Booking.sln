@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticket Booking", "Ticket Booking\Ticket Booking.csproj", "{7F8C43AD-8850-4548-9699-9125EC3446A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLibrary", "DataLibrary\DataLibrary.csproj", "{797EB6B2-3053-4600-8593-2CC5B9B966EA}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProjectDB", "ProjectDB\ProjectDB.sqlproj", "{BA46E594-6CC1-43EB-9F26-304E8E21C525}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,16 @@ Global
 		{7F8C43AD-8850-4548-9699-9125EC3446A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F8C43AD-8850-4548-9699-9125EC3446A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F8C43AD-8850-4548-9699-9125EC3446A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{797EB6B2-3053-4600-8593-2CC5B9B966EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{797EB6B2-3053-4600-8593-2CC5B9B966EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{797EB6B2-3053-4600-8593-2CC5B9B966EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{797EB6B2-3053-4600-8593-2CC5B9B966EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA46E594-6CC1-43EB-9F26-304E8E21C525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA46E594-6CC1-43EB-9F26-304E8E21C525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA46E594-6CC1-43EB-9F26-304E8E21C525}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BA46E594-6CC1-43EB-9F26-304E8E21C525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA46E594-6CC1-43EB-9F26-304E8E21C525}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA46E594-6CC1-43EB-9F26-304E8E21C525}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

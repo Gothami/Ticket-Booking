@@ -9,6 +9,7 @@ namespace Ticket_Booking.Models
     {
         public int MovieID { get; set; }
         public string MovieName { get; set; }
+        public string MovieDescription { get; set; }
         public Dictionary<string, List<DateTime>> MovieLocations { get; set; }
     }
 }

@@ -7,4 +7,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[MovieID]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="96866e05-de48-4a40-9184-8a875fffbd04" ChangeDateTime="09/09/2019 09:11:35">
+    <Property Name="ElementName" Value="[dbo].[Shows].[MovieID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Shows]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ShowMovieID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5db46d73-8427-4771-9477-20949389ccbe" ChangeDateTime="09/09/2019 09:11:40">
+    <Property Name="ElementName" Value="[dbo].[Shows].[TheatreID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Shows]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ShowTheatreID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="966f588f-bbeb-46a9-95bc-bb6bbdc9e19a" ChangeDateTime="09/09/2019 09:25:48">
+    <Property Name="ElementName" Value="[dbo].[FK_Shows_ToTable_1]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Shows]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Shows_Theatres]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="18eb3f0d-55bb-4511-9722-0825e3f1ff64" ChangeDateTime="09/09/2019 09:25:57">
+    <Property Name="ElementName" Value="[dbo].[FK_Shows_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Shows]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Shows_Movies]" />
+  </Operation>
 </Operations>

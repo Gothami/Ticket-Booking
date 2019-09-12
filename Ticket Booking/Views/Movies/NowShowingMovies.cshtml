@@ -1,26 +1,16 @@
-﻿@model Ticket_Booking.Models.MovieModel
-
+﻿
 <div>
-    <h4>MovieModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MovieID)
-        </dt>
+<table>
+    <tr>
+        <th>Movie</th>
+        <th>Movie Description</th>
+        <th>Reserve Tickets</th>
+    </tr>    
+    <tr>
+        @foreach(MovieModel )
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.MovieID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MovieName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MovieName)
-        </dd>
-
-    </dl>
+</table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

@@ -63,9 +63,9 @@
     <Folder Include="Publish Profiles\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="DB\Tables\Movies.sql" />
     <Build Include="DB\Tables\Theatres.sql" />
     <Build Include="DB\Tables\Shows.sql" />
+    <Build Include="DB\Tables\Movies.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ProjectDB.refactorlog" />

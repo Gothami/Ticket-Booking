@@ -13,7 +13,9 @@ namespace Ticket_Booking.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            return View(ShowMovies());
+            var data = ShowMovies();
+            ViewBag.MovielList = data;
+            return View();
         }
 
         [HttpGet]
@@ -44,7 +46,10 @@ namespace Ticket_Booking.Controllers
             {
                 movieModel.MovieName = model.MovieName;
                 movieModel.MovieDescription = model.MovieDescription;
-                viewMovies.Add(movieModel);
+                viewMovies.Add(new MovieModel()
+                { MovieName = model.MovieName,
+                    MovieDescription = model.MovieDescription
+                });
             }
 
             return viewMovies;            

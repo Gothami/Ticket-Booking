@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Ticket_Booking.Models.MovieModel>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,10 +163,10 @@ tr:nth-child(even) {
 
     <div class="tab">
         <button class="tablinks" onclick="showDetails">Now Showing</button>
-        <button class="tablinks" onclick="showDetails">Coming Soon</button>
+        <!--<button class="tablinks" onclick="showDetails">Coming Soon</button>-->
     </div>
 
-    <div>@Html.Partial("NowShowingMovies")</div>
+    <div>@Html.Partial("NowShowingMovies", (List<Ticket_Booking.Models.MovieModel>)ViewBag.MovieList)</div>
 
 <script>
 var slideIndex = 1;

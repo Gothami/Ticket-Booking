@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Ticket_Booking.Models.MovieModel>
 <div>
 <table>
     <tr>
@@ -6,9 +6,15 @@
         <th>Movie Description</th>
         <th>Reserve Tickets</th>
     </tr>    
+@foreach (Ticket_Booking.Models.MovieModel movie in ViewBag.MovielList)
+{
     <tr>
-        @foreach(MovieModel )
-    </tr>
+    <td>@Html.DisplayFor(item => movie.MovieName)</td>
+    <td>@Html.DisplayFor(item => movie.MovieDescription)</td>
+    <td>@Html.ActionLink("Reserve Tickets","ReserveTickets")</td>
+     </tr>           
+
+}
 
 </table>
 </div>

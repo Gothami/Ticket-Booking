@@ -28,9 +28,7 @@ namespace Ticket_Booking.Controllers
             }
 
             ViewBag.MovieList = movieList;
-            return View();
-
-                
+            return View();                
         }
 
         [HttpGet]
@@ -48,26 +46,13 @@ namespace Ticket_Booking.Controllers
                 MovieProcessor.CreateMovie(movieObject.MovieName, movieObject.MovieDescription);
             }
             return View();
-
         }
 
-        public List<MovieModel> ShowMovies()
+        [HttpGet]
+        public ActionResult ReserveTickets(string movieName)
         {
-            List<DataLibrary.Models.MovieModel> movies = MovieProcessor.RetrieveData();
-            List<MovieModel> viewMovies= new List<MovieModel>();
-            MovieModel movieModel = new MovieModel();
-
-            foreach(DataLibrary.Models.MovieModel model in movies)
-            {
-                movieModel.MovieName = model.MovieName;
-                movieModel.MovieDescription = model.MovieDescription;
-                viewMovies.Add(new MovieModel()
-                { MovieName = model.MovieName,
-                    MovieDescription = model.MovieDescription
-                });
-            }
-
-            return viewMovies;            
+            ViewBag.MovieName = movieName;
+            return View();
         }
     }
 }

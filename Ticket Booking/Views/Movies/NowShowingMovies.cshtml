@@ -11,8 +11,8 @@
     <tr>
     <td>@Html.DisplayFor(item => movie.MovieName)</td>
     <td>@Html.DisplayFor(item => movie.MovieDescription)</td>
-    <td>@Html.ActionLink("Reserve Tickets","ReserveTickets")</td>
-     </tr>           
+    <td>@Html.ActionLink("Reserve Tickets","ReserveTickets", new { movieName = movie.MovieName } )</td>
+    </tr>           
 
 }
 

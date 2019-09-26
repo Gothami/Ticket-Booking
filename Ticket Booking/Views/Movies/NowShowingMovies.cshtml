@@ -6,7 +6,7 @@
         <th>Movie Description</th>
         <th>Reserve Tickets</th>
     </tr>    
-@foreach (Ticket_Booking.Models.MovieModel movie in ViewBag.MovielList)
+@foreach (Ticket_Booking.Models.MovieModel movie in ViewBag.MovieList)
 {
     <tr>
     <td>@Html.DisplayFor(item => movie.MovieName)</td>

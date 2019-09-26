@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using Ticket_Booking.Models;
@@ -13,9 +14,23 @@ namespace Ticket_Booking.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            var data = ShowMovies();
-            ViewBag.MovielList = data;
+            IEnumerable<MovieModel> movieList = null;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:47058/api/movie");
+            var responseTask = client.GetAsync(client.BaseAddress);
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<MovieModel>>();
+                readTask.Wait();
+                movieList = readTask.Result;
+            }
+
+            ViewBag.MovieList = movieList;
             return View();
+
+                
         }
 
         [HttpGet]

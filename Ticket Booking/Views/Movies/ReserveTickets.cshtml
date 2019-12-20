@@ -1,88 +1,72 @@
-﻿
+﻿@using Ticket_Booking.Models
+@model Ticket_Booking.Models.ReserveMovieModel
+
 @{
     ViewBag.Title = "ReserveTickets";
 }
 
-@*@section Scripts
-    {
-    <script type="text/javascript">
-        $(document).ready(
-            function minusButton(value)
-                {
+<h2>Reserve Tickets for @ViewBag.movieName</h2>
 
-            }
-        )
-        $(document).ready(
-            function plusButton(){
-                alert("Hellooo");
-            }
-            )
-        
-    </script>
-    }*@
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
     
-<html>
-<body>
-    <h2>Reserve Tickets for @ViewBag.MovieName</h2>
-    <script>
-        function minusButton() {
-            var textFieldVal = parseInt(document.getElementById("textField").value);
-            if (textFieldVal <= 1) {
-                document.getElementById("textField").value = 1;
-            }
-            else {
-                document.getElementById("textField").value = textFieldVal - 1;
-            }
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })        
+        <div class="form-group">
+            @Html.LabelFor(model => model.location, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.location, (IEnumerable<SelectListItem>)ViewBag.loc, "Select Location", new { id="locDropDown", onchange= "SelectedIndexChanged()", gdhh="fg" })
+                @Html.ValidationMessageFor(model => model.location, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.noOfTickets, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.noOfTickets, new { htmlAttributes = new { @class = "form-control", min=1, } })
+                @Html.ValidationMessageFor(model => model.noOfTickets, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.seatZone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2" id="drop">
+                @Html.DropDownListFor(model => model.seatZone, (SelectList)ViewBag.zones, "Select Zone")
+                @Html.ValidationMessageFor(model => model.seatZone, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Select Zone", "ShowZone", "Cinemas", new { controller = "Controller", movieName = ViewBag.movieName}, new { id="showZone", target = "_blank", onclick = "getSelectedScreenID();" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Reserve" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+
+    function SelectedIndexChanged() {
+        var element = document.getElementById("locDropDown");
+        var selectedText = element.options[element.selectedIndex].text;
+
+        if (document.getElementById("locDropDown").value == "") {
+            document.getElementById("showZone").hidden = true;
         }
-        function plusButton() {
-            var textFieldVal = parseInt(document.getElementById("textField").value);
-            document.getElementById("textField").value = textFieldVal + 1;
+        else {
+            document.getElementById("showZone").hidden = false;
+            document.getElementById("showZone").href = "../Cinemas/ShowZone?screenName=".concat(selectedText.toString(10)).concat("&moviename=").concat('@(ViewBag.movieName)');
         }
-    </script>
-    <form>
-        <div class="form-group row">
-            <label for="priceDropdown" class="col-lg-2 col-form-label-lg">Ticket Price</label>
-            <div class="btn-group col-sm-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="priceDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Ticket Price</button>
-                <ul class="dropdown-menu">
-                    <li role="presentation"><a role="menuitem" href="#">Rs 50.00</a></li>
-                    <li role="presentation"><a role="menuitem" href="#">Rs 100.00</a></li>
-                    <li role="presentation"><a role="menuitem" href="#">Rs 200.00</a></li>
-                    <li role="presentation"><a role="menuitem" href="#">Rs 500.00</a></li>
-                    <li role="presentation"><a role="menuitem" href="#">Rs 1000.00</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="locationDropdown" class="col-lg-2 col-form-label-lg">Movie Location</label>
-            <div class="btn-group col-sm-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="locationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Location</button>
-                <ul class="dropdown-menu">
-                    <li role="presentation"><a role="menuitem" href="#">Savoy</a></li>
-                    <li role="presentation"><a role="menuitem" href="#">Regal</a></li>
-                    <li role="presentation"><a role="menuitem" href="#">Liberty</a></li>
-                    <li role="presentation"><a role="menuitem" href="#">Majestic City</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="timeDropdown" class="col-lg-2 col-form-label-lg">Movie Time</label>
-            <div class="btn-group col-sm-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="timeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Movie Time</button>
-                <ul class="dropdown-menu">
-                    <li role="presentation"><a role="menuitem" href="#">10.30 a.m.</a></li>
-                    <li role="presentation"><a role="menuitem" href="#">2.30 p.m.</a></li>
-                    <li role="presentation"><a role="menuitem" href="#">6.30 p.m.</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="noOfTickets" class="col-lg-2 col-form-label-lg">No. of Tickets</label>
-            <div class="col-lg-2 ">
-                <input type="number" id="textField" name="quant[1]" class="form-control input-number" value="1" min="1" max="15">
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</body>
-</html>
+    }   
+
+    window.onload = SelectedIndexChanged;
+
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

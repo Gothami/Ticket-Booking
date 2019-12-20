@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "ReserveTickets";
+}
+
+@*@section Scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(
+            function minusButton(value)
+                {
+
+            }
+        )
+        $(document).ready(
+            function plusButton(){
+                alert("Hellooo");
+            }
+            )
+        
+    </script>
+    }*@
+    
+<html>
+<body>
+    <h2>Reserve Tickets for @ViewBag.MovieName</h2>
+    <script>
+        function minusButton() {
+            var textFieldVal = parseInt(document.getElementById("textField").value);
+            if (textFieldVal <= 1) {
+                document.getElementById("textField").value = 1;
+            }
+            else {
+                document.getElementById("textField").value = textFieldVal - 1;
+            }
+        }
+        function plusButton() {
+            var textFieldVal = parseInt(document.getElementById("textField").value);
+            document.getElementById("textField").value = textFieldVal + 1;
+        }
+    </script>
+    <form>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label-lg" id="label">Ticket Price</label>
+            <select id="mySelect" class="col-lg-2">
+                <option>Select Ticket Price</option>
+                <option>Rs 50.00</option>
+                <option>Rs 100.00</option>
+                <option>Rs 200.00</option>
+                <option>Rs 500.00</option>
+                <option>Rs 1000.00</option>
+            </select>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label-lg" id="label">Movie Location</label>
+            <select id="mySelect" class="col-lg-2">
+                <option>Select Location</option>
+                <option>Savoy</option>
+                <option>Regal</option>
+                <option>Liberty</option>
+                <option>Majestic City</option>                
+            </select>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-2 col-form-label-lg" id="label">Movie Time</label>
+            <select id="mySelect" class="col-lg-2">
+                <option>Select Movie Time</option>
+                <option>10.30 a.m.</option>
+                <option>2.30 p.m.</option>
+                <option>6.30 p.m.</option>                
+            </select>
+        </div>
+        <div class="form-group row">
+            <label for="noOfTickets" class="col-lg-2 col-form-label-lg">No. of Tickets</label>
+            <div class="col-lg-2 ">
+                <input type="number" id="textField" name="quant[1]" class="form-control input-number" value="1" min="1" max="15">
+            </div>
+        </div>
+        <button type="submit" value="ReserveTickets" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+</html>

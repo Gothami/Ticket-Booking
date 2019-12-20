@@ -12,6 +12,7 @@ namespace Ticket_Booking.Controllers
     public class MoviesController : Controller
     {
         // GET: Movies
+        //Request data from API
         public ActionResult Index()
         {
             IEnumerable<MovieModel> movieList = null;
@@ -51,8 +52,53 @@ namespace Ticket_Booking.Controllers
         [HttpGet]
         public ActionResult ReserveTickets(string movieName)
         {
-            ViewBag.MovieName = movieName;
+            ReserveMovieModel model = new ReserveMovieModel();
+            //List<string> movieLocation = new List<string>() { "Savoy", "Liberty", "Majestic City" };
+            MovieTheatreModel savoy = new MovieTheatreModel() { TheatreID = 1, TheatreName = "Savoy" };
+            MovieTheatreModel liberty = new MovieTheatreModel() { TheatreID = 2, TheatreName = "Liberty" };
+            MovieTheatreModel mc = new MovieTheatreModel() { TheatreID = 3, TheatreName = "Majestic City" };
+
+            List<MovieTheatreModel> movieLocation = new List<MovieTheatreModel>();
+            movieLocation.Add(savoy);
+            movieLocation.Add(liberty);
+            movieLocation.Add(mc);
+
+            SelectList ss = new SelectList(movieLocation, "TheatreID", "TheatreName");
+
+            List<string> seatZone = new List<string>() {"A","B","C","D","E" };
+            ViewBag.loc = ss;// new SelectList(movieLocation);
+            ViewBag.zones = new SelectList(seatZone);
+            ViewBag.movieName = movieName;
+
+
+
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReserveTickets(ReserveMovieModel movieName)
+        {
+            MovieTheatreModel savoy = new MovieTheatreModel() { TheatreID = 1, TheatreName = "Savoy" };
+            MovieTheatreModel liberty = new MovieTheatreModel() { TheatreID = 2, TheatreName = "Liberty" };
+            MovieTheatreModel mc = new MovieTheatreModel() { TheatreID = 3, TheatreName = "Majestic City" };
+
+            List<MovieTheatreModel> movieLocation = new List<MovieTheatreModel>();
+            movieLocation.Add(savoy);
+            movieLocation.Add(liberty);
+            movieLocation.Add(mc);
+
+            SelectList ss = new SelectList(movieLocation, "TheatreID", "TheatreName");
+            ViewBag.loc = ss;// new SelectList(movieLocation);
+
+            List<string> seatZone = new List<string>() { "A", "B", "C", "D", "E" };
+            ViewBag.zones = new SelectList(seatZone);
+
+
+            ViewBag.MovieName = movieName;
+            return RedirectToAction("Index");
+        }
+
+        
     }
 }

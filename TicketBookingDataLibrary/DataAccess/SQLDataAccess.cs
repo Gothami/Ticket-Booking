@@ -34,5 +34,30 @@ namespace DataLibrary.DataAccess
             }
 
         }
+
+        public static int UpdateNoOfTickets(string sql)
+        {
+            using (IDbConnection con = new SqlConnection(GetConnectionString()))
+            {
+                return con.Execute(sql);
+            }
+
+        }
+
+        public static int GetMovieID<T>(string sql)
+        {
+            using (IDbConnection con = new SqlConnection(GetConnectionString())) 
+            {
+                return con.Query(sql).FirstOrDefault().MovieID;
+            }
+        }
+
+        public static int GetTotalTickets(string sql)
+        {
+            using (IDbConnection con = new SqlConnection(GetConnectionString()))
+            {
+                return con.Query(sql).FirstOrDefault().TotalTickets;
+            }
+        }
     }
 }

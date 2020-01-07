@@ -76,29 +76,16 @@ namespace Ticket_Booking.Controllers
         }
 
         [HttpPost]
+        [ActionName("ReserveTicketsSubmit")]
         [ValidateAntiForgeryToken]
-        public ActionResult ReserveTickets(ReserveMovieModel movieName)
+        public ActionResult ReserveTicketsSubmit(ReserveMovieModel movieModel, string MovieName)
         {
-            MovieTheatreModel savoy = new MovieTheatreModel() { TheatreID = 1, TheatreName = "Savoy" };
-            MovieTheatreModel liberty = new MovieTheatreModel() { TheatreID = 2, TheatreName = "Liberty" };
-            MovieTheatreModel mc = new MovieTheatreModel() { TheatreID = 3, TheatreName = "Majestic City" };
-
-            List<MovieTheatreModel> movieLocation = new List<MovieTheatreModel>();
-            movieLocation.Add(savoy);
-            movieLocation.Add(liberty);
-            movieLocation.Add(mc);
-
-            SelectList ss = new SelectList(movieLocation, "TheatreID", "TheatreName");
-            ViewBag.loc = ss;// new SelectList(movieLocation);
-
-            List<string> seatZone = new List<string>() { "A", "B", "C", "D", "E" };
-            ViewBag.zones = new SelectList(seatZone);
-
-
-            ViewBag.MovieName = movieName;
+            int locationID = Int32.Parse(movieModel.location.FirstOrDefault());
+            int noOfTickets = movieModel.noOfTickets;
+            string zone = movieModel.seatZone.FirstOrDefault();
+            DateTime time = movieModel.movieDate;
+            int x = ReservationProcessor.ReserveTickets(locationID, MovieName.TrimEnd(), noOfTickets, zone, time);
             return RedirectToAction("Index");
-        }
-
-        
+        }        
     }
 }

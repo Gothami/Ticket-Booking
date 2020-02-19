@@ -18,8 +18,7 @@ namespace TicketBookingDataLibrary.BusinessLogic
             int movieID = SQLDataAccess.GetMovieID<string>(movieIDsql);
 
             if(movieID > 0)
-            {
-                
+            {                
                 string sql = @"UPDATE dbo.Reservations SET AvailableTickets = AvailableTickets - " + noOfTickets +
                 " WHERE (ShowMovieID = " + movieID + " AND ShowTheatreID = " + locationID + " AND SeatZone = '" + seatZone + "' AND MovieTime = '" + dateOnly + "')";
 
@@ -41,24 +40,17 @@ namespace TicketBookingDataLibrary.BusinessLogic
                         availableTickets = availableTickets
                     };
 
-
                     string sqlUpdate = @"INSERT INTO dbo.Reservations (ShowMovieID, ShowTheatreID, MovieTime, SeatZone, NoOfTickets, AvailableTickets) 
                                         values (@movieID, @locationID,@date, @seatZone, @noOfTickets, @availableTickets)";
                     return SQLDataAccess.SaveData(sqlUpdate, data);
                 }
 
-                return result;
-
-                
-
-
-                
+                return result;       
             }
             else
             {
                 return -1;
-            }
-            
+            }            
         }
     }
 }

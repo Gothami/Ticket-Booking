@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 using Ticket_Booking.Models;
@@ -44,7 +46,15 @@ namespace Ticket_Booking.Controllers
         {
             if (ModelState.IsValid)
             {
-                MovieProcessor.CreateMovie(movieObject.MovieName, movieObject.MovieDescription);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:47058/api/movie");
+
+                var myContent = JsonConvert.SerializeObject(movieObject);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                var responseTask = client.PostAsync(client.BaseAddress, byteContent).Result;
             }
             return View();
         }
@@ -52,8 +62,6 @@ namespace Ticket_Booking.Controllers
         [HttpGet]
         public ActionResult ReserveTickets(string movieName)
         {
-            ReserveMovieModel model = new ReserveMovieModel();
-            //List<string> movieLocation = new List<string>() { "Savoy", "Liberty", "Majestic City" };
             MovieTheatreModel savoy = new MovieTheatreModel() { TheatreID = 1, TheatreName = "Savoy" };
             MovieTheatreModel liberty = new MovieTheatreModel() { TheatreID = 2, TheatreName = "Liberty" };
             MovieTheatreModel mc = new MovieTheatreModel() { TheatreID = 3, TheatreName = "Majestic City" };

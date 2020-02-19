@@ -17,9 +17,11 @@ namespace Ticket_Booking.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _dbContext;
 
         public AccountController()
         {
+            _dbContext = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -170,6 +172,28 @@ namespace Ticket_Booking.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult RegisterRole()
+        {
+            ViewBag.UserName = new SelectList(_dbContext.Users.ToList(), "UserName", "UserName");
+            ViewBag.Name = new SelectList(_dbContext.Roles.ToList(), "Name", "Name");
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RegisterRole(RegisterViewModel model, ApplicationUser user)
+        {
+            var userID = _dbContext.Users.Where(i => i.UserName == user.UserName).Select(s => s.Id);
+            string updateID = "";
+            foreach(var id in userID)
+            {
+                updateID = id;
+            }
+            await this.UserManager.AddToRoleAsync(updateID, model.Name);
+
+            return RedirectToAction("Index", "Home");
         }
 
         //

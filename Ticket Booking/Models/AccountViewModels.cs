@@ -64,6 +64,8 @@ namespace Ticket_Booking.Models
 
     public class RegisterViewModel
     {
+        public string Name { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,6 +81,8 @@ namespace Ticket_Booking.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel

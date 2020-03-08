@@ -10,7 +10,7 @@ namespace Ticket_Booking.Controllers
 {
     public class RolesController : Controller
     {
-        ApplicationDbContext context;
+        public ApplicationDbContext context;
 
         public RolesController()
         {

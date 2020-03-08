@@ -215,6 +215,7 @@
     <Compile Include="Models\MovieModel.cs" />
     <Compile Include="Models\MovieTheatreModel.cs" />
     <Compile Include="Models\ReserveMovieModel.cs" />
+    <Compile Include="Models\ScreenModel.cs" />
     <Compile Include="Models\UploadScreenLayoutModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -230,10 +231,15 @@
     <Content Include="Content\bootstrap-slate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\AllinOne.png" />
+    <Content Include="Content\Images\NoHiddenFees.png" />
+    <Content Include="Content\Images\SecurePayments.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Images\movieTheatre.jpg" />
+    <Content Include="Content\Styles\HomePageStyle.css" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />

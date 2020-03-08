@@ -56,29 +56,41 @@ namespace Ticket_Booking.Controllers
 
                 var responseTask = client.PostAsync(client.BaseAddress, byteContent).Result;
             }
+            ModelState.Clear();
+            ViewBag.Message = "Movie Added Successfully";
+
             return View();
         }
 
         [HttpGet]
         public ActionResult ReserveTickets(string movieName)
         {
-            MovieTheatreModel savoy = new MovieTheatreModel() { TheatreID = 1, TheatreName = "Savoy" };
-            MovieTheatreModel liberty = new MovieTheatreModel() { TheatreID = 2, TheatreName = "Liberty" };
-            MovieTheatreModel mc = new MovieTheatreModel() { TheatreID = 3, TheatreName = "Majestic City" };
-
             List<MovieTheatreModel> movieLocation = new List<MovieTheatreModel>();
-            movieLocation.Add(savoy);
-            movieLocation.Add(liberty);
-            movieLocation.Add(mc);
+            IEnumerable<ScreenModel> cinemaList = null;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:47058/api/screen");
+            var responseTask = client.GetAsync(client.BaseAddress);
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<ScreenModel>>();
+                readTask.Wait();
+                cinemaList = readTask.Result;
+            }
 
-            SelectList ss = new SelectList(movieLocation, "TheatreID", "TheatreName");
+            foreach (ScreenModel screen in cinemaList)
+            {
+                MovieTheatreModel theatre = new MovieTheatreModel() { TheatreID = screen.ScreenID, TheatreName = screen.ScreenName };
+                movieLocation.Add(theatre);
+            }
 
+            SelectList selectList = new SelectList(movieLocation, "TheatreID", "TheatreName");
             List<string> seatZone = new List<string>() {"A","B","C","D","E" };
-            ViewBag.loc = ss;// new SelectList(movieLocation);
+            
             ViewBag.zones = new SelectList(seatZone);
             ViewBag.movieName = movieName;
-
-
+            ViewBag.loc = selectList;
 
             return View();
         }

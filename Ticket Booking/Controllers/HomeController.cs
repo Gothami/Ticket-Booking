@@ -23,6 +23,8 @@ namespace Ticket_Booking.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+            ViewBag.Address = "Hello Ticekting Providers, Adelaide SA";
+            ViewBag.Phone = "Phone : +614072863528";
 
             return View();
         }

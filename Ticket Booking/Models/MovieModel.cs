@@ -10,10 +10,6 @@ namespace Ticket_Booking.Models
 {
     public class MovieModel
     {
-        [Display(Name = "Movie ID")]
-        [Range(1, 1000000)]
-        public int MovieID { get; set; }
-
         [Required]
         [Display(Name = "Movie Name")]
         public string MovieName { get; set; }
@@ -22,7 +18,7 @@ namespace Ticket_Booking.Models
         public string MovieDescription { get; set; }
 
         [Display(Name = "Movie Theatres")]
-        public List<string> MovieTheatres = new List<string>() { "Regal", "Savoy" };        
+        public List<string> MovieTheatres = new List<string>(); //{ "Regal", "Savoy" };        
 
         public Dictionary<string, List<DateTime>> MovieLocations { get; set; }
     }

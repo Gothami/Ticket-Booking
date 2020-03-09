@@ -18,7 +18,7 @@ namespace Ticket_Booking.Models
         public string MovieDescription { get; set; }
 
         [Display(Name = "Movie Theatres")]
-        public List<string> MovieTheatres = new List<string>(); //{ "Regal", "Savoy" };        
+        public List<string> MovieTheatres = new List<string>(); 
 
         public Dictionary<string, List<DateTime>> MovieLocations { get; set; }
     }

@@ -39,13 +39,16 @@ namespace Ticket_Booking.Controllers
         {
             return View();
         }
-
+         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddMovie(MovieModel movieObject)
+        public ActionResult AddMovie(string[] DynamicTextBox, MovieModel movieObject)
         {
             if (ModelState.IsValid)
             {
+                foreach(string cinema in DynamicTextBox)
+                    movieObject.MovieTheatres.Add(cinema);
+
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri("http://localhost:47058/api/movie");
 

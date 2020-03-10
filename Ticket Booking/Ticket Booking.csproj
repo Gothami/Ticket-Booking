@@ -212,6 +212,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MovieLocationsModel.cs" />
     <Compile Include="Models\MovieModel.cs" />
     <Compile Include="Models\MovieTheatreModel.cs" />
     <Compile Include="Models\ReserveMovieModel.cs" />

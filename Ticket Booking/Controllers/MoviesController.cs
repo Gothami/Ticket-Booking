@@ -65,24 +65,25 @@ namespace Ticket_Booking.Controllers
             return View();
         }
 
+        //Call API's ScreenController/GetScreenNames()
         [HttpGet]
         public ActionResult ReserveTickets(string movieName)
         {
             List<MovieTheatreModel> movieLocation = new List<MovieTheatreModel>();
-            IEnumerable<ScreenModel> cinemaList = null;
+            IEnumerable<MovieLocationsModel> cinemaList = null;
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:47058/api/screen");
+            client.BaseAddress = new Uri("http://localhost:47058/api/screen?movieName=" + movieName);
             var responseTask = client.GetAsync(client.BaseAddress);
             responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<IList<ScreenModel>>();
+                var readTask = result.Content.ReadAsAsync<IList<MovieLocationsModel>>();
                 readTask.Wait();
                 cinemaList = readTask.Result;
             }
 
-            foreach (ScreenModel screen in cinemaList)
+            foreach (MovieLocationsModel screen in cinemaList)
             {
                 MovieTheatreModel theatre = new MovieTheatreModel() { TheatreID = screen.ScreenID, TheatreName = screen.ScreenName };
                 movieLocation.Add(theatre);
@@ -98,6 +99,7 @@ namespace Ticket_Booking.Controllers
             return View();
         }
 
+        //TODO: Get data from Web API
         [HttpPost]
         [ActionName("ReserveTicketsSubmit")]
         [ValidateAntiForgeryToken]

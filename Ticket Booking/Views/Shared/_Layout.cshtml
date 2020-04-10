@@ -23,15 +23,18 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Movies<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            @if (@User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Add a Movie", "AddMovie", "Movies")</li>
+                            }
+                            <li>@Html.ActionLink("Book Movie Tickets", "Index", "Movies")</li>                           
+                        </ul>
+                    </li>
                     @if (@User.Identity.IsAuthenticated)
                     {
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Movies<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Add a Movie", "AddMovie", "Movies")</li>
-                                <li>@Html.ActionLink("Book Movie Tickets", "Index", "Movies")</li>
-                            </ul>
-                        </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Cinemas<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">

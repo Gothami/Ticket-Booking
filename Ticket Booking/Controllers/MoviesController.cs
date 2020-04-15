@@ -15,6 +15,7 @@ namespace Ticket_Booking.Controllers
     {
         // GET: Movies
         //Request data from API
+        [HttpGet]
         public ActionResult Index()
         {
             IEnumerable<MovieModel> movieList = null;
@@ -90,7 +91,8 @@ namespace Ticket_Booking.Controllers
             }
 
             SelectList selectList = new SelectList(movieLocation, "TheatreID", "TheatreName");
-            List<string> seatZone = new List<string>() {"A","B","C","D","E" };
+
+            List <string> seatZone = new List<string>();
             
             ViewBag.zones = new SelectList(seatZone);
             ViewBag.movieName = movieName;
@@ -105,11 +107,17 @@ namespace Ticket_Booking.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ReserveTicketsSubmit(ReserveMovieModel movieModel, string MovieName)
         {
-            int locationID = Int32.Parse(movieModel.location.FirstOrDefault());
-            int noOfTickets = movieModel.noOfTickets;
-            string zone = movieModel.seatZone.FirstOrDefault();
-            DateTime time = movieModel.movieDate;
-            int x = ReservationProcessor.ReserveTickets(locationID, MovieName.TrimEnd(), noOfTickets, zone, time);
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:47058/api/reservation");
+            movieModel.movieName = MovieName;
+            var myContent = JsonConvert.SerializeObject(movieModel);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var responseTask = client.PostAsync(client.BaseAddress, byteContent).Result;
+
+            ModelState.Clear();
+
             return RedirectToAction("Index");
         }        
     }

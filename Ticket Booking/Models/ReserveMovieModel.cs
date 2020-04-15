@@ -12,7 +12,8 @@ namespace Ticket_Booking.Models
         //public List<int> ticketPrice { get; set; }
 
         [Display(Name = "Location")]
-        public List<string> location { get; set; }
+        public int locationID { get; set; }
+        public string selectedLocationText { get; set; }
 
         [Display(Name = "Movie Date")]
         [DataType(DataType.Date)]
@@ -22,6 +23,8 @@ namespace Ticket_Booking.Models
         public int noOfTickets { get; set; }
 
         [Display(Name ="Seat Zone")]
-        public List<string> seatZone { get; set; }
+        public string seatZone { get; set; }
+
+        public string movieName { get; set; }
     }
 }
